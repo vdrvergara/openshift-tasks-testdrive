@@ -22,6 +22,8 @@ public class WhoResource {
     @GET
     @Produces(MediaType.TEXT_PLAIN)
     public Response whoAmI() {
+        String deploymentName = System.getenv("DEPLOYMENT_NAME");
+        
         String hostname = "Unknown";
         try {
             hostname = InetAddress.getLocalHost().getHostName();
@@ -29,8 +31,12 @@ public class WhoResource {
             LOG.log(Level.WARNING, "### UNABLE TO DETERMINE HOSTNAME: {0}", ex.getMessage());
         }
         
+        StringBuilder builder = new StringBuilder(hostname);
+        if(deploymentName != null) 
+            builder.append(" (").append(deploymentName).append(")");
+        
         return Response.status(Response.Status.OK)
-                .type(MediaType.TEXT_PLAIN).entity(hostname).build();
+                .type(MediaType.TEXT_PLAIN).entity(builder.toString()).build();
     }
 
 }
