@@ -10,13 +10,16 @@ spec:
   strategy:
     jenkinsPipelineStrategy:
       jenkinsfile: |-
-        node('maven') {
-            stage 'build'
-            openshiftBuild(buildConfig: 'tasks', showBuildLogs: 'true')
+          node('maven') {
+             stage ('Build') {
+               git 'http://gogs:3000/testdrive/openshift-tasks-testdrive.git'
+               sh "mvn clean install -DskipTests=true"
+             }
 
-            stage 'deploy'
-            openshiftDeploy(deploymentConfig: 'tasks')
-        }
+             stage('Deploying') {
+               sh "oc start-build tasks-app --from-file target/openshift-tasks.war --follow --wait=true  --namespace maltron" 
+             }
+          }
     type: JenkinsPipeline
   triggers:
   - github:
