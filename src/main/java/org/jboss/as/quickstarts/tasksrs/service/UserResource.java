@@ -21,4 +21,5 @@ public class UserResource {
     @Inject
     private UserDao userDao;
 
+
 }
