@@ -51,55 +51,12 @@ public class TaskResource {
     @Inject
     private TaskDao taskDao;
 
-    @POST
-    @Path("tasks/{title}")
-    public Response createTask(@Context UriInfo info, @Context SecurityContext context,
-        @PathParam("title") @DefaultValue("task") String taskTitle) {
 
-        User user = getUser(context);
-        Task task = new Task(taskTitle);
 
-        taskDao.createTask(user, task);
 
-        // Construct the URI for the newly created resource and put in into the Location header of the response
-        // (assumes that there is only one occurrence of the task title in the request)
-        String rawPath = info.getAbsolutePath().getRawPath().replace(task.getTitle(), task.getId().toString());
-        UriBuilder uriBuilder = info.getAbsolutePathBuilder().replacePath(rawPath);
-        URI uri = uriBuilder.build();
 
-        return Response.created(uri).build();
-    }
 
-    @DELETE
-    @Path("tasks/{id}")
-    public void deleteTaskById(@Context SecurityContext context, @PathParam("id") Long id) {
-        Task task = getTaskById(context, id);
 
-        taskDao.deleteTask(task);
-    }
-
-    @GET
-    @Path("tasks/{id}")
-    @Produces({ "application/xml", "application/json" })
-    public Task getTaskById(@Context SecurityContext context, @PathParam("id") Long id) {
-        User user = getUser(context);
-
-        return getTask(user, id);
-    }
-
-    @GET
-    @Path("tasks/{title}")
-    @Produces({ "application/xml", "application/json" })
-    public List<Task> getTasksByTitle(@Context SecurityContext context, @PathParam("title") String title) {
-        return getTasks(getUser(context), title);
-    }
-
-    @GET
-    @Path("tasks")
-    @Produces({ "application/xml", "application/json" })
-    public List<Task> getTasks(@Context SecurityContext context) {
-        return getTasks(getUser(context));
-    }
 
     // Utility Methods
 

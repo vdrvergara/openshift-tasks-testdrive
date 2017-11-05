@@ -21,22 +21,4 @@ public class UserResource {
     @Inject
     private UserDao userDao;
 
-    @GET
-    @Path("/")
-    @Produces({ "application/xml", "application/json" })
-    public List<User> getUsers() {
-    	List<User> users = userDao.getAll();
-    	
-//		TODO: Uncomment to sort users based on number of tasks
-
-//    	Collections.sort(users, new Comparator<User>() {
-//
-//			@Override
-//			public int compare(User user1, User user2) {
-//				return Integer.compare(user2.getTasks().size(), user1.getTasks().size());
-//			}
-//		});
-    	
-        return users;
-    }
 }
