@@ -17,7 +17,7 @@ spec:
              }
 
              stage('Deploying') {
-               sh "oc start-build tasks-app --from-file target/openshift-tasks.war --follow --wait=true  --namespace maltron" 
+               sh "oc start-build tasks-app --from-file target/openshift-tasks.war --follow --wait=true  --namespace <YOUR PREFIX>" 
              }
           }
     type: JenkinsPipeline
