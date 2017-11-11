@@ -34,7 +34,7 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.SecurityContext;
 import javax.ws.rs.core.UriBuilder;
 import javax.ws.rs.core.UriInfo;
-
+    
 import org.jboss.as.quickstarts.tasksrs.model.Task;
 import org.jboss.as.quickstarts.tasksrs.model.TaskDao;
 import org.jboss.as.quickstarts.tasksrs.model.User;
