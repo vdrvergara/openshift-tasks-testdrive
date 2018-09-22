@@ -17,7 +17,7 @@ import org.jboss.as.quickstarts.tasksrs.model.UserDao;
  */
 
 @Path("/users")
-public class UserResource {
+public class ResourceUser {
     @Inject
     private UserDao userDao;
 
