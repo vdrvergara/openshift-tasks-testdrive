@@ -12,12 +12,12 @@ spec:
       jenkinsfile: |-
           node('maven') {
              stage ('Build') {
-               git 'http://gogs:3000/testdrive/openshift-tasks-testdrive.git'
+               git 'http://gogs:3000/<YOUR PREFIX>/openshift-tasks-testdrive.git'
                sh "mvn clean install -DskipTests=true"
              }
 
              stage('Deploying') {
-               sh "oc start-build tasks-app --from-file target/openshift-tasks.war --follow --wait=true  --namespace <YOUR PREFIX>" 
+               sh "oc start-build stage-app --from-file target/openshift-tasks.war --follow --wait=true  --namespace <YOUR PREFIX>" 
              }
           }
     type: JenkinsPipeline
