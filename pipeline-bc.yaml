@@ -16,7 +16,7 @@ spec:
                sh "mvn clean install -DskipTests=true"
              }
 
-             stage('Deploying') {
+             stage('Deploy') {
                sh "oc start-build stage-app --from-file target/openshift-tasks.war --follow --wait=true  --namespace <YOUR PREFIX>" 
              }
           }
