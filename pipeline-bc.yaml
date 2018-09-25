@@ -11,7 +11,7 @@ spec:
     jenkinsPipelineStrategy:
       jenkinsfile: |-
           node('maven') {
-             stage ('Build') {
+             stage ('Compile') {
                git 'http://gogs:3000/<YOUR PREFIX>/openshift-tasks-testdrive.git'
                sh "mvn clean install -DskipTests=true"
              }
